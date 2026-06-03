@@ -1,0 +1,43 @@
+.card {
+  width: 282px;
+  height: 361px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.card__image {
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  display: block;
+}
+
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.card__button-like {
+  width: 21px;
+  height: 19px;
+  background: transparent url(../images/vector.svg) center/cover no-repeat;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.card__text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font: size 18px;
+  font-weight: 900;
+  margin: 0;
+  color: #000000;
+}

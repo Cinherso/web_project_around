@@ -1,0 +1,52 @@
+@media (max-width: 880px) {
+  .header {
+    max-width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+  }
+
+  .content {
+    max-width: 100%;
+    padding: 0 28px;
+    box-sizing: border-box;
+  }
+
+  .profile__name {
+    font-size: 27px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(auto-fit, 28px);
+    padding: 36px 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .header {
+    padding: 18px;
+  }
+  .content {
+    padding: 0 18px;
+  }
+  .profile__avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile__name {
+    font-size: 22px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    padding: 20px 0;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .card__image {
+    width: 100px;
+  }
+}
