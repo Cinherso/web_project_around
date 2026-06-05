@@ -14,6 +14,7 @@
 }
 
 .card__info {
+  border-radius: 0 0 10px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,7 +26,7 @@
 .card__button-like {
   width: 21px;
   height: 19px;
-  background: transparent url(../images/vector.svg) center/cover no-repeat;
+  background: transparent url(../../images/vector.svg) center/cover no-repeat;
   border: none;
   cursor: pointer;
   padding: 0;
