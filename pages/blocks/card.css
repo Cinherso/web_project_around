@@ -4,6 +4,7 @@
   border-radius: 10px;
   overflow: hidden;
   background-color: #000000;
+  position: relative;
 }
 
 .card__image {
@@ -32,6 +33,10 @@
   padding: 0;
   flex-shrink: 0;
 }
+.card__button-like_active {
+  background: transparent url(../../images/vector-active.svg) center/cover
+    no-repeat;
+}
 
 .card__text {
   text-overflow: ellipsis;
@@ -41,4 +46,20 @@
   font-weight: 900;
   margin: 0;
   color: #000000;
+}
+
+.card__button-delete {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  background-image: url(../../images/trash.svg);
+  background-size: 18px 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }

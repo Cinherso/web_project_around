@@ -63,3 +63,22 @@
   cursor: pointer;
   padding: 0;
 }
+.popup__container_type_image {
+  max-width: 75vw;
+  max-height: 75vh;
+  background-color: transparent;
+  padding: 0;
+}
+
+.popup__image {
+  max-width: 75vw;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+}
+
+.popup__caption {
+  color: #ffffff;
+  font-size: 12px;
+  margin-top: 10px;
+}

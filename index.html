@@ -46,79 +46,7 @@
           </div>
         </section>
 
-        <section class="cards">
-          <div class="card">
-            <img
-              src="./images/card__image-alaska.jpg"
-              alt="alaska"
-              class="card__image"
-            />
-            <div class="card__info">
-              <p class="card__text">Alaska</p>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </div>
-
-          <div class="card">
-            <img
-              src="./images/card__image-grand canyon.jpg"
-              alt="grand canyon"
-              class="card__image"
-            />
-            <div class="card__info">
-              <p class="card__text">Grand Canyon</p>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </div>
-
-          <div class="card">
-            <img
-              src="./images/card__image-hawaii.jpg"
-              alt="hawaii"
-              class="card__image"
-            />
-            <div class="card__info">
-              <p class="card__text">Hawaii</p>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </div>
-
-          <div class="card">
-            <img
-              src="./images/card__image-new york.jpg"
-              alt="new york"
-              class="card__image"
-            />
-            <div class="card__info">
-              <p class="card__text">New York</p>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </div>
-
-          <div class="card">
-            <img
-              src="./images/card__image-portland.jpg"
-              alt="portland"
-              class="card__image"
-            />
-            <div class="card__info">
-              <p class="card__text">Portland</p>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </div>
-
-          <div class="card">
-            <img
-              src="./images/card__image-san francisco.jpg"
-              alt="san francisco"
-              class="card__image"
-            />
-            <div class="card__info">
-              <p class="card__text">San Francisco</p>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </div>
-        </section>
+        <section class="cards"></section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2026 Around The U.S.</p>
@@ -156,6 +84,58 @@
 
           <button type="submit" class="popup__button">Guardar</button>
         </form>
+      </div>
+    </section>
+    <template id="card-template">
+      <div class="card">
+        <img class="card__image" alt="" />
+        <button type="button" class="card__button-delete"></button>
+        <div class="card__info">
+          <p class="card__text"></p>
+          <button type="button" class="card__button-like"></button>
+        </div>
+      </div>
+    </template>
+    <section class="popup" id="popup-add-card">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+
+        <h2 class="popup__title">New Place</h2>
+        <form class="popup__form" name="add-card" novalidate>
+          <div class="popup__field">
+            <input
+              type="text"
+              name="title"
+              id="title-input"
+              class="popup__input"
+              placeholder="Title"
+              required
+            />
+            <span class="popup__input-error title-input-error"></span>
+          </div>
+
+          <div class="popup__field">
+            <input
+              type="url"
+              name="url"
+              id="url-input"
+              class="popup__input"
+              placeholder="Image URL"
+              required
+            />
+            <span class="popup__input-error url-input-error"></span>
+          </div>
+
+          <button type="submit" class="popup__button">Guardar</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup" id="popup-image">
+      <div class="popup__container popup__container_type_image">
+        <button type="button" class="popup__close"></button>
+        <img class="popup__image" src="" alt="" />
+        <p class="popup__caption"></p>
       </div>
     </section>
   </body>
