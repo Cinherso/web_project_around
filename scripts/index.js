@@ -1,6 +1,6 @@
-//1.SELECCIONAR ELEMENTOS DEL DOM
+//1. SELECCIONAR ELEMENTOS DEL DOM
 
-//Botones y popup
+//Botones y popup de editar perfil
 const editButton = document.querySelector(".profile__edit-button");
 const closeButton = document.querySelector(".popup__close");
 const popup = document.querySelector(".popup");
@@ -9,42 +9,71 @@ const popup = document.querySelector(".popup");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
-//2. ABRIR Y CERRAR EL POPUP
-editButton.addEventListener("click", function () {
-  //Rellenar los campos con los valores actuales de la página
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileDescription.textContent;
-
-  openModal(popup);
-});
-
-closeButton.addEventListener("click", function () {
-  popup.classList.remove("popup_opened");
-});
-
-//3.MANEJAR EL FORMULARIO
-//BUSQUEMOS EL FORMULARIO EN EL DOM
+//Campos del formulario de editar perfil
 const formElement = document.querySelector(".popup__form");
-
-//Busquemos los campos del formulario
 const nameInput = document.querySelector("#name-input");
 const aboutInput = document.querySelector("#about-input");
 
-function handleProfileFormSubmit(evt) {
-  //previene que el navegador recargue la página
-  evt.preventDefault();
+//Elementos del popup de agregar tarjeta
+const addCardPopup = document.querySelector("#popup-add-card");
+const addCardButton = document.querySelector(".profile__add-button");
+const addCardForm = document.querySelector('[name="add-card"]');
+const closeAddCardButton = addCardPopup.querySelector(".popup__close");
 
-  //Insertar nuevos valores a la página
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = aboutInput.value;
+//Elementos del popup de imagen
+const imagePopup = document.querySelector("#popup-image");
+const popupImage = imagePopup.querySelector(".popup__image");
+const popupCaption = imagePopup.querySelector(".popup__caption");
+const closeImageButton = imagePopup.querySelector(".popup__close");
 
-  //Cerrar el popup al guardar
-  popup.classList.remove("popup_opened");
+//Template y sección de cards
+const cardTemplate = document.querySelector("#card-template").content;
+const cardsSection = document.querySelector(".cards");
+
+//2. FUNCIONES GENÉRICAS DE MODAL
+function openModal(modal) {
+  modal.classList.add("popup_opened");
 }
 
-//conectar el handler al formulario
-formElement.addEventListener("submit", handleProfileFormSubmit);
+function closeModal(modal) {
+  modal.classList.remove("popup_opened");
+}
 
+//3. FUNCIONES DE TARJETAS
+function createCard(data) {
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+
+  const cardImage = cardElement.querySelector(".card__image");
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
+  cardElement.querySelector(".card__text").textContent = data.name;
+
+  cardImage.addEventListener("click", function () {
+    popupImage.src = data.link;
+    popupImage.alt = data.name;
+    popupCaption.textContent = data.name;
+    openModal(imagePopup);
+  });
+
+  const likeButton = cardElement.querySelector(".card__button-like");
+  likeButton.addEventListener("click", function () {
+    likeButton.classList.toggle("card__button-like_active");
+  });
+
+  const deleteButton = cardElement.querySelector(".card__button-delete");
+  deleteButton.addEventListener("click", function () {
+    cardElement.remove();
+  });
+
+  return cardElement;
+}
+
+function renderCard(data) {
+  const card = createCard(data);
+  cardsSection.prepend(card);
+}
+
+//4. TARJETAS INICIALES
 const initialCards = [
   {
     name: "Alaska",
@@ -72,73 +101,51 @@ const initialCards = [
   },
 ];
 
-const cardTemplate = document.querySelector("#card-template").content;
-const cardsSection = document.querySelector(".cards");
-
-function createCard(data) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-
-  const cardImage = cardElement.querySelector(".card__image");
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardElement.querySelector(".card__text").textContent = data.name;
-
-  // abrir popup de imagen al hacer clic
-  cardImage.addEventListener("click", function () {
-    popupImage.src = data.link;
-    popupImage.alt = data.name;
-    popupCaption.textContent = data.name;
-    imagePopup.classList.add("popup_opened");
-  });
-  const likeButton = cardElement.querySelector(".card__button-like");
-  likeButton.addEventListener("click", function () {
-    likeButton.classList.toggle("card__button-like_active");
-  });
-  const deleteButton = cardElement.querySelector(".card__button-delete");
-  deleteButton.addEventListener("click", function () {
-    cardElement.remove();
-  });
-
-  return cardElement;
-}
-function renderCard(data) {
-  const card = createCard(data);
-  cardsSection.prepend(card);
-}
-
 initialCards.forEach(function (data) {
   renderCard(data);
 });
-const addCardPopup = document.querySelector("#popup-add-card");
-const addCardButton = document.querySelector(".profile__add-button");
-const addCardForm = document.querySelector('[name="add-card"]');
-const closeAddCardButton = addCardPopup.querySelector(".popup__close");
 
+//5. POPUP DE EDITAR PERFIL
+editButton.addEventListener("click", function () {
+  nameInput.value = profileName.textContent;
+  aboutInput.value = profileDescription.textContent;
+  openModal(popup);
+});
+
+closeButton.addEventListener("click", function () {
+  closeModal(popup);
+});
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileDescription.textContent = aboutInput.value;
+  closeModal(popup);
+}
+
+formElement.addEventListener("submit", handleProfileFormSubmit);
+
+//6. POPUP DE AGREGAR TARJETA
 addCardButton.addEventListener("click", function () {
-  addCardPopup.classList.add("popup_opened");
+  openModal(addCardPopup);
 });
+
 closeAddCardButton.addEventListener("click", function () {
-  addCardPopup.classList.remove("popup_opened");
+  closeModal(addCardPopup);
 });
+
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-
   const name = document.querySelector("#title-input").value;
   const link = document.querySelector("#url-input").value;
-
   renderCard({ name, link });
-
-  addCardPopup.classList.remove("popup_opened");
+  closeModal(addCardPopup);
   addCardForm.reset();
 }
 
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
-const imagePopup = document.querySelector("#popup-image");
-const popupImage = imagePopup.querySelector(".popup__image");
-const popupCaption = imagePopup.querySelector(".popup__caption");
-const closeImageButton = imagePopup.querySelector(".popup__close");
-
+//7. POPUP DE IMAGEN
 closeImageButton.addEventListener("click", function () {
-  imagePopup.classList.remove("popup_opened");
+  closeModal(imagePopup);
 });
