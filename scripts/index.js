@@ -15,7 +15,7 @@ editButton.addEventListener("click", function () {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileDescription.textContent;
 
-  popup.classList.add("popup_opened");
+  openModal(popup);
 });
 
 closeButton.addEventListener("click", function () {
@@ -101,9 +101,13 @@ function createCard(data) {
 
   return cardElement;
 }
-initialCards.forEach(function (data) {
+function renderCard(data) {
   const card = createCard(data);
-  cardsSection.append(card);
+  cardsSection.prepend(card);
+}
+
+initialCards.forEach(function (data) {
+  renderCard(data);
 });
 const addCardPopup = document.querySelector("#popup-add-card");
 const addCardButton = document.querySelector(".profile__add-button");
@@ -122,8 +126,7 @@ function handleAddCardFormSubmit(evt) {
   const name = document.querySelector("#title-input").value;
   const link = document.querySelector("#url-input").value;
 
-  const newCard = createCard({ name, link });
-  cardsSection.prepend(newCard);
+  renderCard({ name, link });
 
   addCardPopup.classList.remove("popup_opened");
   addCardForm.reset();

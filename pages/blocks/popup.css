@@ -5,7 +5,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  backgroung-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
   z-index: 999;
@@ -58,7 +58,7 @@
   right: -36px;
   width: 32px;
   height: 32px;
-  background: transparent url(/images/close.svg) center/cover no-repeat;
+  background: transparent url(../../images/close.svg) center/cover no-repeat;
   border: none;
   cursor: pointer;
   padding: 0;
