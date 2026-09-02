@@ -82,3 +82,25 @@
   font-size: 12px;
   margin-top: 10px;
 }
+
+.popup__input-error {
+  display: block;
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px;
+  min-height: 14px;
+  visibility: hidden;
+}
+
+.popup__input-error_active {
+  visibility: visible;
+}
+
+.popup__input_type_error {
+  border-bottom: 1px solid #ff0000;
+}
+
+.popup__button_disabled {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+}

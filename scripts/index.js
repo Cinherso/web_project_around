@@ -31,12 +31,29 @@ const cardTemplate = document.querySelector("#card-template").content;
 const cardsSection = document.querySelector(".cards");
 
 //2. FUNCIONES GENÉRICAS DE MODAL
+function handleEscClose(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closeModal(openedPopup);
+  }
+}
+
+function handleOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closeModal(evt.currentTarget);
+  }
+}
+
 function openModal(modal) {
   modal.classList.add("popup_opened");
+  document.addEventListener("keydown", handleEscClose);
+  modal.addEventListener("click", handleOverlayClick);
 }
 
 function closeModal(modal) {
   modal.classList.remove("popup_opened");
+  document.removeEventListener("keydown", handleEscClose);
+  modal.removeEventListener("click", handleOverlayClick);
 }
 
 //3. FUNCIONES DE TARJETAS
