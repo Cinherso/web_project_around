@@ -126,6 +126,7 @@ initialCards.forEach(function (data) {
 editButton.addEventListener("click", function () {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileDescription.textContent;
+  resetValidation(formElement, validationConfig);
   openModal(popup);
 });
 
@@ -144,6 +145,8 @@ formElement.addEventListener("submit", handleProfileFormSubmit);
 
 //6. POPUP DE AGREGAR TARJETA
 addCardButton.addEventListener("click", function () {
+  addCardForm.reset();
+  resetValidation(addCardForm, validationConfig);
   openModal(addCardPopup);
 });
 
