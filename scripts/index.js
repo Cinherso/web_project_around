@@ -1,3 +1,7 @@
+import { openModal, closeModal } from "./utils.js";
+import { FormValidator } from "./FormValidator.js";
+import { Card } from "./card.js";
+
 //1. SELECCIONAR ELEMENTOS DEL DOM
 
 //Botones y popup de editar perfil
@@ -27,67 +31,20 @@ const popupCaption = imagePopup.querySelector(".popup__caption");
 const closeImageButton = imagePopup.querySelector(".popup__close");
 
 //Template y sección de cards
-const cardTemplate = document.querySelector("#card-template").content;
+
 const cardsSection = document.querySelector(".cards");
 
-//2. FUNCIONES GENÉRICAS DE MODAL
-function handleEscClose(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closeModal(openedPopup);
-  }
-}
-
-function handleOverlayClick(evt) {
-  if (evt.target === evt.currentTarget) {
-    closeModal(evt.currentTarget);
-  }
-}
-
-function openModal(modal) {
-  modal.classList.add("popup_opened");
-  document.addEventListener("keydown", handleEscClose);
-  modal.addEventListener("click", handleOverlayClick);
-}
-
-function closeModal(modal) {
-  modal.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleEscClose);
-  modal.removeEventListener("click", handleOverlayClick);
-}
-
 //3. FUNCIONES DE TARJETAS
-function createCard(data) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-
-  const cardImage = cardElement.querySelector(".card__image");
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardElement.querySelector(".card__text").textContent = data.name;
-
-  cardImage.addEventListener("click", function () {
-    popupImage.src = data.link;
-    popupImage.alt = data.name;
-    popupCaption.textContent = data.name;
-    openModal(imagePopup);
-  });
-
-  const likeButton = cardElement.querySelector(".card__button-like");
-  likeButton.addEventListener("click", function () {
-    likeButton.classList.toggle("card__button-like_active");
-  });
-
-  const deleteButton = cardElement.querySelector(".card__button-delete");
-  deleteButton.addEventListener("click", function () {
-    cardElement.remove();
-  });
-
-  return cardElement;
+function handleCardClick(name, link) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupCaption.textContent = name;
+  openModal(imagePopup);
 }
 
 function renderCard(data) {
-  const card = createCard(data);
-  cardsSection.prepend(card);
+  const card = new Card(data, "#card-template", handleCardClick);
+  cardsSection.prepend(card.generateCard());
 }
 
 //4. TARJETAS INICIALES
@@ -126,7 +83,7 @@ initialCards.forEach(function (data) {
 editButton.addEventListener("click", function () {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileDescription.textContent;
-  resetValidation(formElement, validationConfig);
+  profileFormValidator.resetValidation();
   openModal(popup);
 });
 
@@ -143,10 +100,24 @@ function handleProfileFormSubmit(evt) {
 
 formElement.addEventListener("submit", handleProfileFormSubmit);
 
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
+};
+const profileFormValidator = new FormValidator(validationConfig, formElement);
+const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
+
+profileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+
 //6. POPUP DE AGREGAR TARJETA
 addCardButton.addEventListener("click", function () {
   addCardForm.reset();
-  resetValidation(addCardForm, validationConfig);
+  addCardFormValidator.resetValidation();
   openModal(addCardPopup);
 });
 

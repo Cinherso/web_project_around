@@ -40,9 +40,6 @@
   margin: 0;
 }
 
-.profile__edit-button {
-}
-
 .profile__description {
   text-overflow: ellipsis;
   white-space: nowrap;
