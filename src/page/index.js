@@ -4,7 +4,7 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Section } from "../components/Section.js";
-import { initialCards } from "../constants/constants.js";
+import { initialCards, validationConfig } from "../constants/constants.js";
 
 const cardsList = new Section(
   {
@@ -36,16 +36,6 @@ const formElement = document.querySelector(".popup__form");
 const addCardForm = document.querySelector('[name="add-card"]');
 const nameInput = document.querySelector("#name-input");
 const aboutInput = document.querySelector("#about-input");
-
-//2. VALIDACIÓN DE FORMULARIOS
-const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_active",
-};
 
 const profileFormValidator = new FormValidator(validationConfig, formElement);
 const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
