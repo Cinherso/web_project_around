@@ -65,7 +65,8 @@
 .profile__edit-button {
   width: 24px;
   height: 24px;
-  background: transparent url(../images/edit-button.png) center/cover no-repeat;
+  background: transparent url(../../images/edit-button.png) center/cover
+    no-repeat;
   border: 1px solid #ffffff;
   cursor: pointer;
   padding: 0;

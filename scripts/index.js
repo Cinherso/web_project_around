@@ -85,9 +85,9 @@ function handleCardClick(name, link) {
   imagePopupInstance.open(name, link);
 }
 
-initialCards.forEach(function (data) {
-  renderCard(data);
-});
+//initialCards.forEach(function (data) {
+//  renderCard(data);
+//});
 
 //5. BOTONES QUE ABREN LOS POPUPS
 editButton.addEventListener("click", function () {
